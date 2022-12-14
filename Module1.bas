@@ -28,7 +28,7 @@ Sub allYearlyChange()
      volTotal = 0
      yearlyChange = closePrice - openPrice
      
-     'Creating new columns
+     'Creating new column's titles
      ws.Cells(1, 9).Value = "Ticker"
      ws.Cells(1, 10).Value = "Yearly Change"
      ws.Cells(1, 11).Value = "Percentage Change"
@@ -49,6 +49,7 @@ Sub allYearlyChange()
      
       For i = 2 To lastRow - 1
     
+        'If the ticker changes we need to update the final values
         If ws.Cells(i, 1).Value <> ws.Cells(i + 1, 1).Value Then
             closePrice = ws.Cells(i, 6).Value
             percentage = (closePrice - openPrice) / openPrice
@@ -97,7 +98,8 @@ Sub allYearlyChange()
      
      Next i
         
-       'Calculate for the last row of the sheet
+       'Since we read the data till (lastRow-1) in the for loop we need to
+       'update the data  after reading the last row of the sheet
         volTotal = volTotal + ws.Cells(lastRow, 7).Value
         closePrice = ws.Cells(lastRow, 6).Value
         percentage = (closePrice - openPrice) / openPrice
